@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -20,9 +23,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                Greeting(name = "Lucas Cabral")
+                MyScreenContent()
             }
         }
+    }
+}
+
+@Composable
+fun MyScreenContent() {
+    Column {
+        Greeting(name = "Nome: ")
+        Divider(color = Color.Black)
+        Greeting(name = "Lucas Cabral")
     }
 }
 
@@ -37,10 +49,10 @@ fun MyApp(content: @Composable () -> Unit) {
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = Color.Green) {
+    Surface(color = Color.Yellow) {
         Text(
-            text = "Hello $name!",
-            color = Color.Red,
+            text = name,
+            color = Color.Black,
             modifier = Modifier.padding(24.dp)
         )
     }
@@ -50,6 +62,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     MyApp {
-        Greeting(name = "Lucas Cabral")
+        MyScreenContent()
     }
 }
