@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -32,7 +33,12 @@ class MainActivity : ComponentActivity() {
 fun Counter(
     count: Int, updateCount: (Int) -> Unit
 ) {
-    Button(onClick = { updateCount(count+1) }) {
+    Button(
+        onClick = { updateCount(count+1) },
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = if (count > 5) Color.Green else Color.White
+        )
+        ) {
         Text("I've been clicked $count times")
     }
 }
@@ -48,12 +54,13 @@ fun MyScreenContent(
     )
 ) {
     val counterState = remember { mutableStateOf(0) }
-    Column {
-        for (name in names) {
-            Greeting(name = name)
-            Divider(color = Color.Black)
+    Column(modifier = Modifier.fillMaxHeight()) {
+        Column(modifier = Modifier.weight(1f)) {
+            for (name in names) {
+                Greeting(name = name)
+                Divider(color = Color.Black)
+            }
         }
-        Divider(color = Color.Transparent, thickness = 32.dp)
         Counter(
             count = counterState.value,
             updateCount = { newCount ->
