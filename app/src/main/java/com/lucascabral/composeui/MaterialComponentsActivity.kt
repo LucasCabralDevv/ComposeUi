@@ -39,7 +39,7 @@ fun LayoutsTest() {
             })
         }
     ) { innerPadding ->
-        BodyContent(Modifier.padding(innerPadding))
+        BodyContent(Modifier.padding(innerPadding).padding(8.dp))
     }
 }
 
