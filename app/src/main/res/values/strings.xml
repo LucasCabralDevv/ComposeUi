@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Compose Ui</string>
+    <string name="title_activity_compose2">ComposeActivity2</string>
 </resources>
