@@ -44,6 +44,16 @@ fun Counter(
 }
 
 @Composable
+fun NameList(names: List<String>, modifier: Modifier = Modifier) {
+    Column(modifier = Modifier) {
+        for (name in names) {
+            Greeting(name = name)
+            Divider(color = Color.Black)
+        }
+    }
+}
+
+@Composable
 fun MyScreenContent(
     names: List<String> = listOf(
         "Lucas Cabral",
@@ -56,10 +66,7 @@ fun MyScreenContent(
     val counterState = remember { mutableStateOf(0) }
     Column(modifier = Modifier.fillMaxHeight()) {
         Column(modifier = Modifier.weight(1f)) {
-            for (name in names) {
-                Greeting(name = name)
-                Divider(color = Color.Black)
-            }
+            NameList(names = names)
         }
         Counter(
             count = counterState.value,
