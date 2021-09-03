@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -19,7 +21,7 @@ class ListsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeUiTheme {
-                SimpleList()
+                LazyList()
             }
         }
     }
@@ -35,10 +37,20 @@ fun SimpleList() {
     }
 }
 
+@Composable
+fun LazyList() {
+    val scrollState = rememberLazyListState()
+    LazyColumn(state = scrollState) {
+        items(100) {
+            Text("Item #$it")
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview3() {
     ComposeUiTheme {
-        SimpleList()
+        LazyList()
     }
 }
