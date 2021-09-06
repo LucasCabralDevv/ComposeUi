@@ -9,23 +9,26 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.lucascabral.composeui.ui.theme.ComposeUiTheme
+import kotlinx.coroutines.launch
 
 class ListsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeUiTheme {
-                LazyList()
+                ScrollingList()
             }
         }
     }
@@ -67,10 +70,42 @@ fun ImageListItem(index: Int) {
     }
 }
 
+@Composable
+fun ScrollingList() {
+    val listSize = 100
+    val scrollState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    Column {
+        Row {
+            Button(onClick = {
+                coroutineScope.launch {
+                    scrollState.animateScrollToItem(0)
+                }
+            }) {
+                Text("Scroll to the top")
+            }
+
+            Button(onClick = {
+                coroutineScope.launch {
+                    scrollState.animateScrollToItem(listSize - 1)
+                }
+            }) {
+                Text("Scroll to the end")
+            }
+        }
+        LazyColumn(state = scrollState) {
+            items(listSize) {
+                ImageListItem(it)
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview3() {
     ComposeUiTheme {
-        LazyList()
+        ScrollingList()
     }
 }
