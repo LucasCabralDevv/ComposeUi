@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeUi">
         <activity
+            android:name=".ListsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_custom_layout"
+            android:theme="@style/Theme.ComposeUi.NoActionBar" />
+        <activity
             android:name=".MaterialComponentsActivity"
             android:exported="true"
             android:label="@string/title_activity_lists"
@@ -27,7 +32,7 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.ComposeUi.NoActionBar" />
         <activity
-            android:name=".ListsActivity"
+            android:name=".CustomLayoutActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ComposeUi.NoActionBar">
